@@ -24,7 +24,5 @@ namespace CafeManagementSystemAPI.Models
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal? LastOrderPrice { get; set; }
-
-        public ICollection<Order> Orders { get; set; }
     }
 }
