@@ -47,7 +47,7 @@ namespace CafeManagementSystemAPI.Controllers
             Console.WriteLine("Received Order:");
             Console.WriteLine(JsonSerializer.Serialize(order)); // Log to verify contents
 
-            if (order.OrderItems == null || !order.OrderItems.Any())
+            if (order.OrderItems == null)
             {
                 return BadRequest("OrderItems cannot be empty.");
             }
