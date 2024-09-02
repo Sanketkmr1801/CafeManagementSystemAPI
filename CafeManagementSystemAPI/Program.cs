@@ -5,9 +5,9 @@ using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 builder.Services.AddControllers();
-
 // Configure Entity Framework Core with SQL Server
 builder.Services.AddDbContext<CafeManagementContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -15,6 +15,8 @@ builder.Services.AddDbContext<CafeManagementContext>(options =>
 // Add Swagger for API documentation (optional)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
 
 // Configure CORS
 builder.Services.AddCors(options =>

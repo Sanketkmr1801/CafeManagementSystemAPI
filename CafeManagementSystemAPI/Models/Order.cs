@@ -20,15 +20,8 @@ namespace CafeManagementSystemAPI.Models
 
         public int? UserID { get; set; }
 
-        [ForeignKey(nameof(UserID))]
-
         [JsonIgnore]
-        
-        public User User { get; set; }
-        [JsonIgnore]
-        public ICollection<OrderItem> OrderItems { get; set; }
-
-        [JsonIgnore]
-        public ICollection<Transaction> Transactions { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }
+
 }

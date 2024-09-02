@@ -18,6 +18,15 @@ public class CafeManagementContext : DbContext
     // Optionally override OnModelCreating to configure the model
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Configure relationships and entity settings here if needed
+        modelBuilder.Entity<Order>()
+            .HasMany(o => o.OrderItems)
+            .WithOne(oi => oi.Order)
+            .HasForeignKey(oi => oi.OrderID);
+
+        modelBuilder.Entity<OrderItem>()
+            .HasOne(oi => oi.MenuItem)
+            .WithMany()
+            .HasForeignKey(oi => oi.MenuItemID);
     }
+
 }

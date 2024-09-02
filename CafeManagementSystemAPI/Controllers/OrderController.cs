@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CafeManagementSystemAPI.Models;
+using System.Text.Json;
 
 namespace CafeManagementSystemAPI.Controllers
 {
@@ -43,11 +44,27 @@ namespace CafeManagementSystemAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(Order order)
         {
+            Console.WriteLine("Received Order:");
+            Console.WriteLine(JsonSerializer.Serialize(order)); // Log to verify contents
+
+            if (order.OrderItems == null || !order.OrderItems.Any())
+            {
+                return BadRequest("OrderItems cannot be empty.");
+            }
+
+            // Ensure each OrderItem is associated with the Order
+            foreach (var item in order.OrderItems)
+            {
+                item.OrderID = order.OrderID;
+            }
+
             _context.Order.Add(order);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetOrder), new { id = order.OrderID }, order);
         }
+
+
 
         // PUT: api/Order/5
         [HttpPut("{id}")]

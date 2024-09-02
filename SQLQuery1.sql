@@ -122,3 +122,6 @@ GO
 -- Select all users to verify data
 SELECT * FROM [User];
 GO
+
+SELECT * FROM OrderItem
+GO
